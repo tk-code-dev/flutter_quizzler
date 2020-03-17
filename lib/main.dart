@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'question_data.dart';
 
 QuestionData questionData = QuestionData();
@@ -31,24 +32,58 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
   void checkAnswer(bool userAnswer) {
+    bool correctAnswer = questionData.getQuestionAnswer();
+
     setState(() {
-      bool corectAnswer = questionData.getQuestionAnswer();
-      if (corectAnswer == userAnswer) {
-        scoreKeeper.add(
-          Icon(
+      //  Use IF/ELSE to check if we've reached the end of the quiz. If so,
+      //On the next line, you can also use if (quizBrain.isFinished()) {}, it does the same thing.
+      if (questionData.isFinished() == true) {
+        // show an alert using rFlutter_alert,
+
+        //This is the code for the basic alert from the docs for rFlutter Alert:
+        //Alert(context: context, title: "RFLUTTER", desc: "Flutter is awesome.").show();
+
+        //Modified for our purposes:
+        Alert(
+          context: context,
+          title: '',
+          desc: 'You\'ve reached the end of the quiz.',
+          image: Image.asset("images/finish_img.png"),
+          buttons: [
+            DialogButton(
+              child: Text(
+                "OK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              color: Color.fromRGBO(0, 179, 134, 1.0),
+              radius: BorderRadius.circular(0.0),
+            ),
+          ],
+        ).show();
+
+        // reset the questionNumber,
+        questionData.reset();
+
+        //  empty out the scoreKeeper.
+        scoreKeeper = [];
+      }
+
+      //  If we've not reached the end, ELSE do the answer checking steps below 👇
+      else {
+        if (userAnswer == correctAnswer) {
+          scoreKeeper.add(Icon(
             Icons.check,
             color: Colors.green,
-          ),
-        );
-      } else {
-        scoreKeeper.add(
-          Icon(
+          ));
+        } else {
+          scoreKeeper.add(Icon(
             Icons.close,
             color: Colors.red,
-          ),
-        );
+          ));
+        }
+        questionData.nextQuestion();
       }
-      questionData.nextQuestion();
     });
   }
 
