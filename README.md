@@ -10,11 +10,10 @@ Reviewing Stateful and Stateless Widgets as well as learning about the fundament
 
 Making a quiz app that tests your general knowledge. As one of the most popular types of apps on the app stores, create quiz for other people to enjoy!
 
-![Finished App](https://github.com/londonappbrewery/Images/blob/master/quizzler-demo.gif)
+![Finished App](https://github.com/londonappbrewery/Images/blob/master/quizzler-demo.gif width="200px)
 
 ## Customized
-<img src="images/quizler_img1.png" width="200px">
-<img src="images/quizler_img2.png" width="200px">
+<img src="images/quizler_img1.png" width="200px"> <img src="images/quizler_img2.png" width="200px">
 
 
 ## 
