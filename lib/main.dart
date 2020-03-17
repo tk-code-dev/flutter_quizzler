@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/Question.dart';
 
 void main() => runApp(Quizzler());
 
@@ -36,14 +37,22 @@ class _QuizPageState extends State<QuizPage> {
     ),
   ];
 
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
+//  List<String> questions = [
+//    'You can lead a cow down stairs but not up stairs.',
+//    'Approximately one quarter of human bones are in the feet.',
+//    'A slug\'s blood is green.',
+//  ];
 
-  List<bool> answer = [false, true, true];
+//  List<bool> answer = [false, true, true];
   int questionNum = 0;
+
+//  Question q1 = Question('You can lead a cow down stairs but not up stairs.',false);
+
+  List<Question> questionBank = [
+    Question('You can lead a cow down stairs but not up stairs.', false),
+    Question('Approximately one quarter of human bones are in the feet.', true),
+    Question('A slug\'s blood is green.', true)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNum],
+                questionBank[questionNum].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -82,7 +91,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool corectAnswer = answer[questionNum];
+                  bool corectAnswer = questionBank[questionNum].questionAnswer;
                   if (corectAnswer == true) {
                     print('Correct');
                   } else {
@@ -108,7 +117,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool corectAnswer = answer[questionNum];
+                  bool corectAnswer = questionBank[questionNum].questionAnswer;
                   if (corectAnswer == false) {
                     print('Correct');
                   } else {
